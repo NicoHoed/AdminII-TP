@@ -1,0 +1,47 @@
+version: "3"
+services:
+  containerA:
+    image: custom-nginx
+    ports:
+      - 80:80
+    networks:
+      - reseau1
+    volumes:
+      - volume1:/app
+      - ./src:/src
+
+  containerB:
+    image: custom-nginx
+    ports:
+      - 81:80
+    networks:
+      - reseau1
+      - reseau2
+    volumes:
+      - volume1:/app1
+      - volume2:/app2
+
+  containerC:
+    image: custom-nginx
+    ports:
+      - 82:80
+    networks:
+      - reseau2
+    volumes:
+      - volume2:/app
+
+volumes:
+  volume1:
+  volume2:
+
+networks:
+  reseau1:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.10.0/24
+  reseau2:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.11.0/24
