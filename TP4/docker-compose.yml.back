@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  dns:
+    image: ubuntu/bind9
+    container_name: dns
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    volumes:
+      - /shared/TP4/config_file/named.conf:/etc/bind/named.conf
+      - /shared/TP4/config_file/l1-1.zone:/etc/bind/l1-1.zone
+    restart: unless-stopped
+
