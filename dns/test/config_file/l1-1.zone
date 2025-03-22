@@ -1,0 +1,17 @@
+$ORIGIN l1-1.ephec-ti.be.
+$TTL 86400
+
+@	IN	SOA	ns.l1-1.ephec-ti.be.		hostmaster.l1-1.ephec-ti.be. (
+					2025022801 ; 
+					21600	   ;
+					3600	   ;
+					604800     ;
+					86400 )    ;
+
+
+	IN	NS	ns.l1-1.ephec-ti.be.
+
+
+ns	IN	A	54.36.181.144
+;ns	IN	AAAA	2001:41d0:302:2200::5ebf
+www	IN	CNAME	ns

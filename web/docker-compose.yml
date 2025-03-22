@@ -1,0 +1,67 @@
+services:
+  nginx:
+    image: nginx:stable
+    container_name: web
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/var/www/html:ro
+      - ./config_nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /var/log/nginx/:/var/log/nginx/
+    networks:
+      dmz:
+        ipv4_address: 172.20.0.2
+    restart: unless-stopped
+
+  php:
+    build: config_php
+    container_name: php
+    volumes:
+      - ./html/www:/var/www/html/www
+    env_file:
+      - db.env
+    environment:
+      DB_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password
+
+    networks:
+      dmz:
+        ipv4_address: 172.20.0.3
+      db_net:
+        ipv4_address: 172.21.0.2
+
+  mariadb:
+    image: mariadb:11.1
+    container_name: db
+    env_file:
+      - db.env
+    environment:
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+    secrets:
+      - db_root_password
+    volumes:
+      - mariadb:/var/lib/mysql
+      - ./db/sql/:/docker-entrypoint-initdb.d/  # Chargement automatique du script SQL au démarrage
+      - ./db/my-resolve.cnf:/etc/mysql/conf.d/my-resolve.cnf:ro
+    networks:
+      db_net:
+        ipv4_address: 172.21.0.3
+
+networks:
+  dmz:
+    name: dmz
+    external: true
+  db_net:
+    name: db_net
+    external: true
+
+secrets:
+  db_root_password:
+    file: db/db_root_password.txt
+  db_password:
+    file: db/db_password.txt
+    
+volumes:
+  mariadb:
+    external: true
