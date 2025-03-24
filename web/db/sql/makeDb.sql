@@ -18,6 +18,3 @@ INSERT INTO products (product_name, product_price) VALUES
   ('Circuit de billes', '75'),
   ('Arc à flèches', '20'),
   ('Maison de poupées', '150');
-
-
-
