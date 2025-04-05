@@ -2,7 +2,7 @@ $ORIGIN l1-1.ephec-ti.be.
 $TTL 86400
 
 @	IN	SOA	ns.l1-1.ephec-ti.be.		hostmaster.l1-1.ephec-ti.be. (
-					2025032501 ; 
+					2025040401 ; 
 					21600	   ;
 					3600	   ;
 					604800     ;
@@ -26,7 +26,31 @@ ns2	IN	AAAA	2001:41d0:302:2200::5e96
 
 www	IN	A	54.36.181.157
 www	IN	AAAA	2001:41d0:302:2200::5e96
+
+www	IN	A	54.36.181.144
+www	IN	AAAA	2001:41d0:302:2200::5ebf
+
+www	IN	A	54.36.180.190
+www	IN	AAAA	2001:41d0:302:2200::5eb3
+
 blog	IN	CNAME	www
+
+taptap	IN	A	54.36.181.144
+taptap	IN	AAAA	2001:41d0:302:2200::5ebf
 
 mail	IN	A	54.36.181.157
 mail	IN	AAAA	2001:41d0:302:2200::5e96
+
+_dmarc	IN	TXT "v=DMARC1; p=quarantine; sp=quarantine; fo=0; adkim=r; aspf=r; pct=100; rf=afrf; ri=86400; rua=mailto:dmarc.report@l1-1.ephec-ti.be; ruf=mailto:dmarc.report@l1-1.ephec-ti.be"
+
+@	IN	TXT "v=spf1 mx -all"
+
+mail._domainkey IN TXT (
+  "v=DKIM1; k=rsa; "
+  "p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu32sFJQ1GGfXxphk/M9xD8prPlSO3Z1lk"
+  "3IPFCNMbAI5EEb55EqK/Lfr+h+nVERc1wb36IEvllrcFQOUpp1dXlVYH961+Ll/I6kofhZXeT2//Qk"
+  "e/UuqXK36k1B0uI7ID7Dgu/Q0TyDlNcMzSorJgFlFqjowRAdbb0dlMH0IoLtmJahlvVOsll7Uo/Aju"
+  "pp1Os2GpppEVCJhEJ7H6X2GvaswN4MNXxJA2iMWnVtMWIAOd0oxJbxGcdjQzQd+6u2WSo3qRvAvXPy"
+  "Hd3kOfJHN7GtAuprtPfWlshtynVoEFBjHw1zc4HC28A4Ii8X9rZvRs6vSfpEv/PDUKoaBZOJdvwIDA"
+  "QAB"
+)
