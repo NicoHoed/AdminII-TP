@@ -1,6 +1,6 @@
 services:
   web:
-    image: 7f4dac4da92a
+    image: nginx:stable
     ports:
       - "80:80"
     volumes:
