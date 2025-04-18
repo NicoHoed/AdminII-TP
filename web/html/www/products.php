@@ -1,21 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-<style>
-   table,
-   th,
-  td {
-     padding: 10px;
-     border: 1px solid black;
-     border-collapse: collapse;
-  }
-</style>
-
-<title>Catalogue WoodyToys</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>WoodyToys - Catalogue</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 
 <body>
-<h1>Catalogue WoodyToys</h1>
+  <header>
+    <h1>Catalogue WoodyToys</h1>
+    <nav>
+      <a href="https://www.l1-1.ephec-ti.be/index.html">Accueil</a>
+      <a href="https://www.l1-1.ephec-ti.be/products.php">Catalogue</a>
+      <a href="https://blog.l1-1.ephec-ti.be">Blog</a>
+    </nav>
+  </header>
+
+  <div class="content">
+    <h2>Nos produits</h2>
+    <p>Découvrez notre sélection de jouets en bois de qualité.</p>
 
 <?php
 $dbname = getenv('MARIADB_DATABASE');
@@ -27,12 +32,12 @@ mysqli_select_db($connect,$dbname) or die("Could not open the database '$dbname'
 $result = mysqli_query($connect,"SELECT id, product_name, product_price FROM products");
 ?>
 
-<table>
-<tr>
- <th>Numéro de produit</th>
- <th>Descriptif</th>
- <th>Prix</th>
-</tr>
+	<table class="rounded-corners">
+		<tr>
+			<th>Numéro de produit</th>
+			<th>Descriptif</th>
+			<th>Prix</th>
+		</tr>
 
 <?
 while ($row = mysqli_fetch_array($result)) {
@@ -40,6 +45,12 @@ while ($row = mysqli_fetch_array($result)) {
 }
 ?>
 
-</table>
+	</table>
+
+	</div>
+<footer>
+    <p>WoodyToys &copy; 2025 - Groupe L1-1</p>
+  </footer>
+
 </body>
 </html>

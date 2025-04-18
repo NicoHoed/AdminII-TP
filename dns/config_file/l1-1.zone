@@ -2,7 +2,7 @@ $ORIGIN l1-1.ephec-ti.be.
 $TTL 86400
 
 @	IN	SOA	ns.l1-1.ephec-ti.be.		hostmaster.l1-1.ephec-ti.be. (
-					2025040401 ; 
+					2025040701 ; 
 					21600	   ;
 					3600	   ;
 					604800     ;
@@ -27,12 +27,6 @@ ns2	IN	AAAA	2001:41d0:302:2200::5e96
 www	IN	A	54.36.181.157
 www	IN	AAAA	2001:41d0:302:2200::5e96
 
-www	IN	A	54.36.181.144
-www	IN	AAAA	2001:41d0:302:2200::5ebf
-
-www	IN	A	54.36.180.190
-www	IN	AAAA	2001:41d0:302:2200::5eb3
-
 blog	IN	CNAME	www
 
 taptap	IN	A	54.36.181.144
@@ -54,3 +48,4 @@ mail._domainkey IN TXT (
   "Hd3kOfJHN7GtAuprtPfWlshtynVoEFBjHw1zc4HC28A4Ii8X9rZvRs6vSfpEv/PDUKoaBZOJdvwIDA"
   "QAB"
 )
+
