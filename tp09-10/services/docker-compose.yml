@@ -1,0 +1,87 @@
+version: "3.9"
+
+services:
+  db:
+    image: chali12/woody_database
+    networks:
+      - woody_net
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=woody
+      - MYSQL_ROOT_PASSWORD=pass
+    ports:
+      - '3306:3306'
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+  api_misc:
+    image: chali12/woody_api_misc
+    restart: always
+    networks:
+      woody_net:
+        aliases:
+          - api_misc
+    deploy:
+      replicas: 1
+
+  api_orders:
+    image: chali12/woody_api_orders
+    restart: always
+    networks:
+      woody_net:
+        aliases:
+          - api_orders
+    deploy:
+      replicas: 1
+
+  api_products:
+    image: chali12/woody_api_products
+    restart: always
+    networks:
+      woody_net:
+        aliases:
+          - api_products
+    deploy:
+      replicas: 1
+
+
+  front:
+    image: chali12/woody_front
+    networks:
+      - woody_net
+    deploy:
+      replicas: 2
+
+  reverse:
+    image: chali12/woody_rp
+    networks:
+      - woody_net
+    ports:
+      - "8080:8080"
+    depends_on:
+      - front
+      - api
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
+  redis:
+    image: redis:latest
+    networks:
+      woody_net:
+        aliases:
+          - redis
+
+    deploy:
+      replicas: 3
+
+
+networks:
+  woody_net:
+    driver: overlay
