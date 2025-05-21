@@ -25,7 +25,7 @@ def ping():
 
 
 # ### 2. Product Service ###
-@app.route('/api/products/', methods=['GET'])
+@app.route('/', methods=['GET'])
 def add_product():
     product = request.args.get('product') or ""
     # 1) on ajoute en base
@@ -40,7 +40,7 @@ def add_product():
     return str(product) or "none"
 
 
-@app.route('/api/products/<int:product_id>', methods=['GET'])
+@app.route('/<int:product_id>', methods=['GET'])
 def get_product(product_id):
     cache_key = f"product:{product_id}"
     cache = r.get(cache_key)
@@ -52,7 +52,7 @@ def get_product(product_id):
     return f"{datetime.now()}: {product}"
 
 
-@app.route('/api/products/last', methods=['GET'])
+@app.route('/last', methods=['GET'])
 def get_last_product():
     cache_key = "products:last"
     cache = r.get(cache_key)

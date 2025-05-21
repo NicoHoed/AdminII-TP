@@ -14,12 +14,12 @@ cors = CORS(app)
 r = redis.Redis(host='redis', port=6379, decode_responses = True)
 
 
-@app.get('/api/ping')
+@app.get('/ping')
 def ping():
     return 'ping'
 
 # ### 3. Order Service
-@app.route('/api/orders/do', methods=['GET'])
+@app.route('/do', methods=['GET'])
 def create_order():
     # very slow process because some payment validation is slow (maybe make it asynchronous ?)
     # order = request.get_json()
@@ -33,7 +33,7 @@ def create_order():
     return f"Your process {order_id} has been created with this product : {product}"
 
 
-@app.route('/api/orders/', methods=['GET'])
+@app.route('/', methods=['GET'])
 def get_order():
     order_id = request.args.get('order_id')
     status = woody.get_order(order_id)
@@ -45,7 +45,7 @@ def get_order():
 def process_order(order_id, order):
     # ...
     # ... do many check and stuff
-    r.publish("order", json.dump({order_id:order_id,order:order}))
+    r.publish("order", json.dumps({order_id:order_id,order:order}))
 
 
 if __name__ == "__main__":
