@@ -20,12 +20,12 @@ def ping():
 
 
 # ### 1. Misc service ### (note: la traduction de miscellaneous est 'divers'
-@app.route('/misc/time', methods=['GET'])
+@app.route('/time', methods=['GET'])
 def get_time():
     return f'misc: {datetime.now()}'
 
 
-@app.route('/misc/heavy', methods=['GET'])
+@app.route('/heavy', methods=['GET'])
 def get_heavy():
     # TODO TP9: cache ?
     name = request.args.get('name')
